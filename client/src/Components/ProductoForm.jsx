@@ -38,6 +38,17 @@ export default () => {
         navigate("/edit/" + productoId)
     };
 
+    const eliminaProducto = (productoId) => {
+        axios
+        .delete("http://localhost:8000/api/productos/delete/" + productoId)
+        .then((res) => {
+            removeFromDom(productoId);
+        });
+    };
+
+    const removeFromDom = (productoId) => {
+        setProductos(productos.filter((producto) => producto._id !== productoId));
+    };
 
     return (
         <form onSubmit={onSubmitHandler}>
@@ -67,6 +78,11 @@ export default () => {
                         <td><a href="" onClick={(e) => {
                         editProducto(producto._id);
                         }}>{producto.titulo}</a></td>
+                        <td><button onClick={(e) => {
+                                eliminaProducto(producto._id);
+                            }} >
+                            Eliminar
+                            </button></td>
                     </tr>
                 ))}
                 </tbody>

@@ -17,3 +17,9 @@ module.exports.findOneSingleProducto = (req, res) => {
     .then((oneSingleProducto) => res.json({ producto: oneSingleProducto }))
     .catch((err) => res.json({ message: "Error al consultar producto particular ", error: err }));
 };
+
+module.exports.deleteProducto = (req, res) => {
+  Producto.findByIdAndDelete({ _id: req.params.id })
+    .then((oneSingleProducto) => res.json({ producto: oneSingleProducto }))
+    .catch((err) => res.json({ message: "Error al eliminar producto particular ", error: err }));
+};
